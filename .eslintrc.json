@@ -1,37 +1,35 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "overrides": [
+    {
+      "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
-        "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "files": ["*.ts", "*.tsx"],
-    "parserOptions": {
+      ],
+      "files": ["*.ts", "*.tsx"],
+      "parserOptions": {
         "project": "tsconfig.json"
-    },
-    "plugins": [
-        "@typescript-eslint",
-        "react",
-        "react-hooks"
-    ],
-    "rules": {
-        "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn",
-        "import/prefer-default-export": "off",
-        "react/prop-types": "off",
-        "react/react-in-jsx-scope": "off",
-        "quotes": "off",
-        "@typescript-eslint/consistent-type-imports": [
-            "warn",
-            {
-              "prefer": "type-imports",
-              "fixStyle": "inline-type-imports"
-            }
-        ]
+      }
     }
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "import/prefer-default-export": "off",
+    "quotes": "off",
+    "@typescript-eslint/consistent-type-imports": [
+      "warn",
+      {
+        "prefer": "type-imports",
+        "fixStyle": "inline-type-imports"
+      }
+    ]
+  }
 }

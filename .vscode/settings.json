@@ -1,5 +1,6 @@
 {
     "editor.formatOnSave": true,
     "javascript.validate.enable": false,
-    "css.lint.unknownAtRules": "ignore"
+    "css.lint.unknownAtRules": "ignore",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
