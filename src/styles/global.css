@@ -3,5 +3,6 @@
 @tailwind utilities;
 
 body {
-    @apply bg-black text-slate-200;
+  @apply bg-black text-slate-200;
+  @apply w-full;
 }

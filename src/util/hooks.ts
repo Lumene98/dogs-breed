@@ -38,7 +38,7 @@ export const useFetchImages = (breed: string) => {
 
   useEffect(() => {
     const fetchImages = async () => {
-      const { message, status } = await getImages(breed);
+      const { message, status } = await getImages(breed, 12);
       setLoading(false);
 
       if (status !== "success") {
