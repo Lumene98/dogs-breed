@@ -59,18 +59,24 @@ export const useFetchImages = (breed: string) => {
     setRefetch(Math.random());
   };
 
-  return { images, error, loading, loadMore };
+  useEffect(() => {
+    setImages([]);
+    loadMore();
+  }, [breed]);
+
+  return { images, error, loading, loadMore, eof: breed !== "" };
 };
 
 interface UseInfiniteScrollingProps {
   observedElementRef: React.MutableRefObject<HTMLDivElement | null>;
   loadMore: () => void;
+  eof: boolean;
 }
 
 export const useInfiniteScrolling = (props: UseInfiniteScrollingProps) => {
   const [visible, setVisible] = useState(0);
   useEffect(() => {
-    if (visible != 0) {
+    if (visible != 0 && !props.eof) {
       props.loadMore();
     }
   }, [visible]);

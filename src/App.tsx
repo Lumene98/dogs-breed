@@ -1,31 +1,55 @@
-import { useRef, type ReactElement } from "react";
+import { useRef, type ReactElement, useState } from "react";
 import "./styles/global.css";
 import {
   useFetchBreeds,
   useFetchImages,
   useInfiniteScrolling,
 } from "util/hooks";
-import { Loading } from "components/Loading";
+import Loading from "components/Loading";
+import BreedSelector from "components/BreedSelector";
 
 function App(): ReactElement {
-  useFetchBreeds();
-  const { images, loadMore, loading } = useFetchImages("");
+  const { breeds } = useFetchBreeds();
+  const [selectedBreed, setSelectedBreed] = useState("");
+  const {
+    images,
+    loadMore,
+    loading: imagesLoading,
+    eof,
+  } = useFetchImages(selectedBreed);
   const observedRef = useRef<HTMLDivElement | null>(null);
-
 
   useInfiniteScrolling({
     observedElementRef: observedRef,
     loadMore,
+    eof,
   });
 
   return (
-    <main className="overflow-none flex h-screen justify-center">
-      {loading && <Loading></Loading>}
-      <div className="flex h-screen w-full flex-wrap gap-8 md:max-w-2xl">
-        {images.map((image, i) => (
-          <img className="h-48 w-48" src={image} key={image + "_" + i}></img>
-        ))}
-        <div className="h-2 w-2" ref={observedRef}></div>
+    <main className="overflow-none m-auto flex h-screen flex-col justify-center md:max-w-2xl">
+      {imagesLoading && <Loading></Loading>}
+      <div className="flex h-screen w-full flex-col">
+        <div className="flex flex-wrap gap-2">
+          {breeds &&
+            Object.keys(breeds).map((breed) => (
+              <BreedSelector
+                setSelectedBreed={setSelectedBreed}
+                subBreeds={breeds[breed]}
+                breed={breed}
+                selectedBreed={selectedBreed}
+              />
+            ))}
+        </div>
+        <div className="flex flex-wrap gap-8">
+          {images.map((image, i) => (
+            <img
+              className="h-48 w-48 rounded-xl"
+              src={image}
+              key={image + "_" + i}
+            ></img>
+          ))}
+          <div className="h-2 w-2" ref={observedRef}></div>
+        </div>
       </div>
     </main>
   );

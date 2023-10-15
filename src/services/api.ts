@@ -1,4 +1,4 @@
-type SubBreed = string[];
+export type SubBreed = string[];
 
 export interface Breeds {
   [breedName: string]: SubBreed;
@@ -36,7 +36,7 @@ export const getImages = async (
 ): Promise<{ message: string[]; status: string }> => {
   let url = "";
   if (breed) {
-    url = `https://dog.ceo/api/breed/${breed}/images/${number}`;
+    url = `https://dog.ceo/api/breed/${breed}/images`;
   } else {
     url = `https://dog.ceo/api/breeds/image/random/${number}`;
   }
