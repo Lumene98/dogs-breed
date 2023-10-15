@@ -50,7 +50,6 @@ export const useFetchImages = (breed: string) => {
     };
 
     setLoading(true);
-    console.log("here");
     fetchImages().catch((e) => {
       console.log(e);
     });
@@ -80,7 +79,6 @@ export const useInfiniteScrolling = (props: UseInfiniteScrollingProps) => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          console.log("inter");
           setVisible(Math.random() + 0.1);
         } else {
           setVisible(0);

@@ -21,11 +21,11 @@ function App(): ReactElement {
   return (
     <main className="overflow-none flex h-screen justify-center">
       {loading && <Loading></Loading>}
-      <div className="flex h-full w-full flex-wrap gap-8 md:max-w-2xl">
+      <div className="flex h-screen w-full flex-wrap gap-8 md:max-w-2xl">
         {images.map((image, i) => (
           <img className="h-48 w-48" src={image} key={image + "_" + i}></img>
         ))}
-        <div ref={observedRef}></div>
+        <div className="h-2 w-2" ref={observedRef}></div>
       </div>
     </main>
   );
