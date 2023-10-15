@@ -63,3 +63,31 @@ export const useFetchImages = (breed: string) => {
 
   return { images, error, loading, loadMore };
 };
+
+interface UseInfiniteScrollingProps {
+  observedElementRef: React.MutableRefObject<Element | null>;
+  loadMore: () => void;
+}
+
+export const useInfiniteScrolling = (props: UseInfiniteScrollingProps) => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          props.loadMore();
+        }
+      },
+      { threshold: 1 },
+    );
+
+    if (props.observedElementRef?.current) {
+      observer.observe(props.observedElementRef?.current);
+    }
+
+    return () => {
+      if (props.observedElementRef?.current) {
+        observer.unobserve(props.observedElementRef?.current);
+      }
+    };
+  }, [props.observedElementRef]);
+};
