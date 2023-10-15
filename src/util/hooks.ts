@@ -49,12 +49,11 @@ export const useFetchImages = (breed: string) => {
       }
     };
 
-    if (!loading) {
-      setLoading(true);
-      fetchImages().catch((e) => {
-        console.log(e);
-      });
-    }
+    setLoading(true);
+    console.log("here");
+    fetchImages().catch((e) => {
+      console.log(e);
+    });
   }, [refetch]);
 
   const loadMore = () => {
@@ -65,19 +64,29 @@ export const useFetchImages = (breed: string) => {
 };
 
 interface UseInfiniteScrollingProps {
-  observedElementRef: React.MutableRefObject<Element | null>;
+  observedElementRef: React.MutableRefObject<HTMLDivElement | null>;
   loadMore: () => void;
 }
 
 export const useInfiniteScrolling = (props: UseInfiniteScrollingProps) => {
+  const [visible, setVisible] = useState(0);
+  useEffect(() => {
+    if (visible != 0) {
+      props.loadMore();
+    }
+  }, [visible]);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          props.loadMore();
+          console.log("inter");
+          setVisible(Math.random() + 0.1);
+        } else {
+          setVisible(0);
         }
       },
-      { threshold: 1 },
+      { threshold: 0.5 },
     );
 
     if (props.observedElementRef?.current) {

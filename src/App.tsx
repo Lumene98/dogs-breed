@@ -10,7 +10,9 @@ import { Loading } from "components/Loading";
 function App(): ReactElement {
   useFetchBreeds();
   const { images, loadMore, loading } = useFetchImages("");
-  const observedRef = useRef(null);
+  const observedRef = useRef<HTMLDivElement | null>(null);
+
+
   useInfiniteScrolling({
     observedElementRef: observedRef,
     loadMore,
