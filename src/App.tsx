@@ -9,6 +9,7 @@ import Loading from "components/Loading";
 import BreedSelector from "components/BreedSelector";
 import Modal from "components/Modal";
 import BreedFilterContainer from "components/BreedFilterContainer";
+import OpenModalButton from "components/OpenModalButton";
 
 function App(): ReactElement {
   const { breeds } = useFetchBreeds();
@@ -20,7 +21,7 @@ function App(): ReactElement {
     eof,
   } = useFetchImages(selectedBreed);
   const observedRef = useRef<HTMLDivElement | null>(null);
-  const [openModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
 
   useInfiniteScrolling({
     observedElementRef: observedRef,
@@ -36,7 +37,8 @@ function App(): ReactElement {
     >
       {imagesLoading && <Loading></Loading>}
       <div className="flex h-screen w-full flex-col">
-        <Modal>
+        <OpenModalButton onClick={() => setOpenModal(true)} />
+        <Modal setOpen={setOpenModal} open={openModal}>
           <BreedFilterContainer>
             {breeds &&
               Object.keys(breeds).map((breed) => (

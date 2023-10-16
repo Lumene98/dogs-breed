@@ -1,21 +1,21 @@
-import { type ReactNode, useState } from "react";
+import { type ReactNode, type Dispatch, type SetStateAction } from "react";
 
 interface IModalProps {
   children: ReactNode;
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const Modal = (props: IModalProps) => {
-  const [open, setOpen] = useState(true);
-
   return (
     <>
-      {open && (
+      {props.open && (
         <div className="overflow-none modal-padding fixed left-0 top-0 z-50 flex h-screen w-screen bg-slate-800 bg-opacity-80 backdrop-blur-sm">
-          <div className="mx-auto flex max-h-[60vh] w-full max-w-3xl flex-col rounded-xl bg-slate-800 shadow">
+          <div className="mx-auto flex max-h-[60vh] w-full max-w-3xl flex-col rounded-xl border border-slate-600 bg-slate-800 shadow">
             <header className="flex p-4 text-xl">
-              <span className="flex-1">Choose filters</span>
+              <span className="flex-1">Choose breed</span>
               <button
-                onClick={() => setOpen(false)}
+                onClick={() => props.setOpen(false)}
                 className="rounded-md bg-slate-600 p-2 text-xs font-bold uppercase"
               >
                 Close
