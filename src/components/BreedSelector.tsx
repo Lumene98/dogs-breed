@@ -1,13 +1,13 @@
 import { type SubBreed } from "services/api";
 
-interface BreedSelectorProps {
+interface IBreedSelectorProps {
   subBreeds: SubBreed;
   breed: string;
   setSelectedBreed: React.Dispatch<React.SetStateAction<string>>;
   selectedBreed: string;
 }
 
-const BreedSelector = (props: BreedSelectorProps) => {
+const BreedSelector = (props: IBreedSelectorProps) => {
   const setSelectedBreed = (breed: string, subBreed?: string) => {
     props.setSelectedBreed((oldBreed) => {
       let newBreed = "";

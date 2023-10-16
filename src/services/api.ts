@@ -1,31 +1,31 @@
 export type SubBreed = string[];
 
-export interface Breeds {
+export interface IBreeds {
   [breedName: string]: SubBreed;
 }
 
-interface BaseResponse {
+interface IBaseResponse {
   message: unknown;
   status: string;
 }
 
-interface BreedsResponse extends BaseResponse {
-  message: Breeds;
+interface IBreedsResponse extends IBaseResponse {
+  message: IBreeds;
 }
 
-interface ImageResponse extends BaseResponse {
+interface IImageResponse extends IBaseResponse {
   message: string[];
 }
 
 export const getBreeds = async (): Promise<{
-  message: Breeds;
+  message: IBreeds;
   status: string;
 }> => {
   const response = await window.fetch("https://dog.ceo/api/breeds/list/all");
 
-  const { message, status }: BreedsResponse = await (<Promise<BreedsResponse>>(
-    response.json()
-  ));
+  const { message, status }: IBreedsResponse = await (<
+    Promise<IBreedsResponse>
+  >response.json());
 
   return { message, status };
 };
@@ -42,7 +42,7 @@ export const getImages = async (
   }
   const response = await window.fetch(url);
 
-  const { message, status }: ImageResponse = await (<Promise<ImageResponse>>(
+  const { message, status }: IImageResponse = await (<Promise<IImageResponse>>(
     response.json()
   ));
 

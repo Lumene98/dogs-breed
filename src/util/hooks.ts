@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { type Breeds, getBreeds, getImages } from "services/api";
+import { type IBreeds, getBreeds, getImages } from "services/api";
 
 export const useFetchBreeds = () => {
-  const [breeds, setBreeds] = useState<Breeds | Record<string, never>>({});
+  const [breeds, setBreeds] = useState<IBreeds | Record<string, never>>({});
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
@@ -67,13 +67,13 @@ export const useFetchImages = (breed: string) => {
   return { images, error, loading, loadMore, eof: breed !== "" };
 };
 
-interface UseInfiniteScrollingProps {
+interface IUseInfiniteScrollingProps {
   observedElementRef: React.MutableRefObject<HTMLDivElement | null>;
   loadMore: () => void;
   eof: boolean;
 }
 
-export const useInfiniteScrolling = (props: UseInfiniteScrollingProps) => {
+export const useInfiniteScrolling = (props: IUseInfiniteScrollingProps) => {
   const [visible, setVisible] = useState(0);
   useEffect(() => {
     if (visible != 0 && !props.eof) {
