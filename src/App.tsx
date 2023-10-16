@@ -50,6 +50,7 @@ function App(): ReactElement {
             ></img>
           ))}
           <div className="h-2 w-2" ref={observedRef}></div>
+          <div className="h-16"></div>
         </div>
       </div>
     </main>
