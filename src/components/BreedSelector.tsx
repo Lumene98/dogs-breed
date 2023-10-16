@@ -46,7 +46,7 @@ const BreedSelector = (props: IBreedSelectorProps) => {
           key={props.breed + "_" + subBreed}
           aria-selected={props.selectedBreed === props.breed + "/" + subBreed}
         >
-          {props.breed + " " + subBreed}
+          {subBreed + " " + props.breed}
         </Chip>
       ))}
     </>
