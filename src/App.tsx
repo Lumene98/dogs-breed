@@ -7,6 +7,7 @@ import {
 } from "util/hooks";
 import Loading from "components/Loading";
 import BreedSelector from "components/BreedSelector";
+import Carousel from "components/Carousel";
 
 function App(): ReactElement {
   const { breeds } = useFetchBreeds();
@@ -29,7 +30,7 @@ function App(): ReactElement {
     <main className="overflow-none m-auto flex h-screen flex-col justify-center md:max-w-2xl">
       {imagesLoading && <Loading></Loading>}
       <div className="flex h-screen w-full flex-col">
-        <div className="flex flex-wrap gap-2">
+        <Carousel>
           {breeds &&
             Object.keys(breeds).map((breed) => (
               <BreedSelector
@@ -39,7 +40,7 @@ function App(): ReactElement {
                 selectedBreed={selectedBreed}
               />
             ))}
-        </div>
+        </Carousel>
         <div className="flex flex-wrap gap-8">
           {images.map((image, i) => (
             <img

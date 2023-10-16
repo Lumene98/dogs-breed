@@ -30,7 +30,7 @@ const BreedSelector = (props: IBreedSelectorProps) => {
     return (
       <button
         onClick={() => setSelectedBreed(props.breed)}
-        className="rounded-md bg-blue-500 px-4 py-2 text-sm font-semibold text-white aria-selected:bg-indigo-500"
+        className="border-1 h-10  whitespace-nowrap rounded-xl border-slate-400 bg-slate-800 px-2 py-2  text-sm font-medium capitalize text-slate-200 aria-selected:bg-indigo-800"
         aria-selected={props.selectedBreed === props.breed}
       >
         {props.breed}
@@ -43,7 +43,7 @@ const BreedSelector = (props: IBreedSelectorProps) => {
       {props.subBreeds.map((subBreed) => (
         <button
           onClick={() => setSelectedBreed(props.breed, subBreed)}
-          className="rounded-md bg-blue-500 px-4 py-2 text-sm font-semibold text-white aria-selected:bg-indigo-500"
+          className="border-1 h-10  whitespace-nowrap rounded-xl border-slate-400 bg-slate-800 px-2 py-2  text-sm font-medium capitalize text-slate-200 aria-selected:bg-indigo-800"
           key={props.breed + "_" + subBreed}
           aria-selected={props.selectedBreed === props.breed + "/" + subBreed}
         >
