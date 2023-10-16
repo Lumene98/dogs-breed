@@ -1,4 +1,5 @@
 import { type SubBreed } from "services/api";
+import Chip from "./Chip";
 
 interface IBreedSelectorProps {
   subBreeds: SubBreed;
@@ -28,27 +29,25 @@ const BreedSelector = (props: IBreedSelectorProps) => {
 
   if (props.subBreeds.length == 0) {
     return (
-      <button
+      <Chip
         onClick={() => setSelectedBreed(props.breed)}
-        className="border-1 h-10  whitespace-nowrap rounded-xl border-slate-400 bg-slate-800 px-2 py-2  text-sm font-medium capitalize text-slate-200 aria-selected:bg-indigo-800"
         aria-selected={props.selectedBreed === props.breed}
       >
         {props.breed}
-      </button>
+      </Chip>
     );
   }
 
   return (
     <>
       {props.subBreeds.map((subBreed) => (
-        <button
+        <Chip
           onClick={() => setSelectedBreed(props.breed, subBreed)}
-          className="border-1 h-10  whitespace-nowrap rounded-xl border-slate-400 bg-slate-800 px-2 py-2  text-sm font-medium capitalize text-slate-200 aria-selected:bg-indigo-800"
           key={props.breed + "_" + subBreed}
           aria-selected={props.selectedBreed === props.breed + "/" + subBreed}
         >
           {props.breed + " " + subBreed}
-        </button>
+        </Chip>
       ))}
     </>
   );

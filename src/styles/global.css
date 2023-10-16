@@ -3,6 +3,22 @@
 @tailwind utilities;
 
 body {
-  @apply bg-black text-slate-200;
+  @apply bg-slate-800 text-slate-200;
   @apply w-full;
+}
+
+.active-modal {
+  @apply overflow-hidden;
+}
+
+@media (min-width: 1024px) {
+  .modal-padding {
+    padding: 12vh;
+  }
+}
+
+@media (max-width: 1024px) {
+  .modal-padding {
+    padding: 2vh;
+  }
 }

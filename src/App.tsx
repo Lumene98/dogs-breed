@@ -7,7 +7,8 @@ import {
 } from "util/hooks";
 import Loading from "components/Loading";
 import BreedSelector from "components/BreedSelector";
-import Carousel from "components/Carousel";
+import Modal from "components/Modal";
+import BreedFilterContainer from "components/BreedFilterContainer";
 
 function App(): ReactElement {
   const { breeds } = useFetchBreeds();
@@ -19,6 +20,7 @@ function App(): ReactElement {
     eof,
   } = useFetchImages(selectedBreed);
   const observedRef = useRef<HTMLDivElement | null>(null);
+  const [openModal] = useState(true);
 
   useInfiniteScrolling({
     observedElementRef: observedRef,
@@ -27,21 +29,27 @@ function App(): ReactElement {
   });
 
   return (
-    <main className="overflow-none m-auto flex h-screen flex-col justify-center md:max-w-2xl">
+    <main
+      className={`overflow-none m-auto flex h-screen flex-col justify-center md:max-w-2xl ${
+        openModal ? "active-modal" : ""
+      }`}
+    >
       {imagesLoading && <Loading></Loading>}
       <div className="flex h-screen w-full flex-col">
-        <Carousel>
-          {breeds &&
-            Object.keys(breeds).map((breed) => (
-              <BreedSelector
-                setSelectedBreed={setSelectedBreed}
-                subBreeds={breeds[breed]}
-                breed={breed}
-                selectedBreed={selectedBreed}
-              />
-            ))}
-        </Carousel>
-        <div className="flex flex-wrap gap-8">
+        <Modal>
+          <BreedFilterContainer>
+            {breeds &&
+              Object.keys(breeds).map((breed) => (
+                <BreedSelector
+                  setSelectedBreed={setSelectedBreed}
+                  subBreeds={breeds[breed]}
+                  breed={breed}
+                  selectedBreed={selectedBreed}
+                />
+              ))}
+          </BreedFilterContainer>
+        </Modal>
+        <div className="flex flex-wrap justify-between gap-8">
           {images.map((image, i) => (
             <img
               className="h-48 w-48 rounded-xl"
@@ -50,7 +58,7 @@ function App(): ReactElement {
             ></img>
           ))}
           <div className="h-2 w-2" ref={observedRef}></div>
-          <div className="h-16"></div>
+          <div className="h-40 w-full"></div>
         </div>
       </div>
     </main>
