@@ -9,11 +9,11 @@ interface IBaseResponse {
   status: string;
 }
 
-interface IBreedsResponse extends IBaseResponse {
+export interface IBreedsResponse extends IBaseResponse {
   message: IBreeds;
 }
 
-interface IImageResponse extends IBaseResponse {
+export interface IImageResponse extends IBaseResponse {
   message: string[];
 }
 
