@@ -41,12 +41,13 @@ function App(): ReactElement {
         <Modal setOpen={setOpenModal} open={openModal}>
           <BreedFilterContainer>
             {breeds &&
-              Object.keys(breeds).map((breed) => (
+              Object.keys(breeds).map((breed, i) => (
                 <BreedSelector
                   setSelectedBreed={setSelectedBreed}
                   subBreeds={breeds[breed]}
                   breed={breed}
                   selectedBreed={selectedBreed}
+                  key={i}
                 />
               ))}
           </BreedFilterContainer>
